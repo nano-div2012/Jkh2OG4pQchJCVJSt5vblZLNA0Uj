@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sky Courier - Hasil</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="hill far"></div>
+    <div class="hill near"></div>
+  </div>
+
+  <main class="screen">
+    <section class="panel result-panel">
+      <h2>Paket Gagal Terkirim</h2>
+      <p id="record-badge" class="badge" hidden>Rekor baru!</p>
+      <dl class="stats">
+        <div><dt>Skor</dt><dd id="r-score">0</dd></div>
+        <div><dt>Jarak</dt><dd id="r-distance">0 m</dd></div>
+        <div><dt>Koin</dt><dd id="r-coins">0</dd></div>
+        <div><dt>Rekor</dt><dd id="r-best">0</dd></div>
+      </dl>
+      <div class="btn-row">
+        <a class="btn" href="game.html">Terbang Lagi</a>
+        <a class="btn secondary" href="../index.html">Menu Utama</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/store.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    (function () {
+      var run = SkyStore.getLastRun() || { score: 0, distance: 0, coins: 0, best: SkyStore.getBest(), isRecord: false };
+      document.getElementById('r-score').textContent = run.score;
+      document.getElementById('r-distance').textContent = run.distance + ' m';
+      document.getElementById('r-coins').textContent = run.coins;
+      document.getElementById('r-best').textContent = run.best;
+      document.getElementById('record-badge').hidden = !run.isRecord;
+    })();
+  </script>
+</body>
+</html>

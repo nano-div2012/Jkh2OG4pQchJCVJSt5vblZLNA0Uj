@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sky Courier - Skor Tertinggi</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="hill far"></div>
+    <div class="hill near"></div>
+  </div>
+
+  <main class="screen">
+    <section class="panel wide-panel">
+      <h2>Skor Tertinggi</h2>
+      <div class="table-wrap">
+        <table class="score-table">
+          <thead>
+            <tr><th>#</th><th>Skor</th><th>Jarak</th><th>Koin</th><th>Tanggal</th></tr>
+          </thead>
+          <tbody id="score-body"></tbody>
+        </table>
+        <p id="score-empty" class="muted" hidden>Belum ada skor. Ayo terbang dulu.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn secondary" href="../index.html">Kembali</a>
+        <a class="btn" href="game.html">Main</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/store.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    (function () {
+      var scores = SkyStore.getScores();
+      var body = document.getElementById('score-body');
+      document.getElementById('score-empty').hidden = scores.length > 0;
+      scores.forEach(function (entry, index) {
+        var row = document.createElement('tr');
+        var date = new Date(entry.date);
+        var cells = [
+          index + 1,
+          entry.score,
+          entry.distance + ' m',
+          entry.coins,
+          isNaN(date.getTime()) ? '-' : date.toLocaleDateString('id-ID')
+        ];
+        cells.forEach(function (value) {
+          var cell = document.createElement('td');
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        body.appendChild(row);
+      });
+    })();
+  </script>
+</body>
+</html>

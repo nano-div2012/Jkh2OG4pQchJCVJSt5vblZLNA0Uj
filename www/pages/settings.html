@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sky Courier - Pengaturan</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="hill far"></div>
+    <div class="hill near"></div>
+  </div>
+
+  <main class="screen">
+    <section class="panel wide-panel">
+      <h2>Pengaturan</h2>
+
+      <div class="setting">
+        <span class="setting-label">Suara</span>
+        <div class="segmented" role="group" aria-label="Suara">
+          <button type="button" class="seg" data-sound="on">Hidup</button>
+          <button type="button" class="seg" data-sound="off">Mati</button>
+        </div>
+      </div>
+
+      <div class="setting">
+        <span class="setting-label">Tingkat Kesulitan</span>
+        <div class="segmented" role="group" aria-label="Tingkat kesulitan">
+          <button type="button" class="seg" data-difficulty="easy">Mudah</button>
+          <button type="button" class="seg" data-difficulty="normal">Normal</button>
+          <button type="button" class="seg" data-difficulty="hard">Sulit</button>
+        </div>
+      </div>
+
+      <p id="status" class="muted" role="status">Perubahan tersimpan otomatis.</p>
+
+      <div class="btn-row">
+        <a class="btn secondary" href="../index.html">Kembali</a>
+        <button id="btn-reset" class="btn danger" type="button">Hapus Data</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/store.js"></script>
+  <script src="../js/ui.js"></script>
+  <script>
+    (function () {
+      var settings = SkyStore.getSettings();
+      var status = document.getElementById('status');
+      var resetBtn = document.getElementById('btn-reset');
+      var resetArmed = false;
+
+      function paint() {
+        document.querySelectorAll('[data-sound]').forEach(function (btn) {
+          btn.classList.toggle('active', (btn.dataset.sound === 'on') === settings.sound);
+        });
+        document.querySelectorAll('[data-difficulty]').forEach(function (btn) {
+          btn.classList.toggle('active', btn.dataset.difficulty === settings.difficulty);
+        });
+      }
+
+      document.addEventListener('click', function (event) {
+        var btn = event.target.closest('.seg');
+        if (!btn) return;
+        if (btn.dataset.sound) settings.sound = btn.dataset.sound === 'on';
+        if (btn.dataset.difficulty) settings.difficulty = btn.dataset.difficulty;
+        SkyStore.saveSettings(settings);
+        status.textContent = 'Tersimpan.';
+        paint();
+      });
+
+      resetBtn.addEventListener('click', function () {
+        if (!resetArmed) {
+          resetArmed = true;
+          resetBtn.textContent = 'Yakin? Ketuk lagi';
+          status.textContent = 'Semua skor dan pengaturan akan dihapus.';
+          setTimeout(function () { resetArmed = false; resetBtn.textContent = 'Hapus Data'; }, 4000);
+          return;
+        }
+        SkyStore.resetAll();
+        settings = SkyStore.getSettings();
+        resetArmed = false;
+        resetBtn.textContent = 'Hapus Data';
+        status.textContent = 'Data dihapus.';
+        paint();
+      });
+
+      paint();
+    })();
+  </script>
+</body>
+</html>

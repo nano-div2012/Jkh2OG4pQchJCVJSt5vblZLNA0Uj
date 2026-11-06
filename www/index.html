@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <meta http-equiv="Refresh" content="0; url='https://example.com/'" />
-    <script>window.location.replace("https://example.com/");</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sky Courier</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/menu.css">
 </head>
-<body style="margin:0;padding:0;background-color:#ffffff;display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;">
-    Redirecting...
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="hill far"></div>
+    <div class="hill near"></div>
+  </div>
+
+  <main class="screen menu">
+    <section class="brand">
+      <p class="brand-tag">Pos Udara Nusantara</p>
+      <h1>Sky<br>Courier</h1>
+      <p class="brand-sub">Antar paket melewati celah tebing. Kumpulkan koin, jangan menabrak.</p>
+      <p class="best">Rekor: <strong id="best-score">0</strong></p>
+    </section>
+
+    <nav class="panel menu-panel" aria-label="Menu utama">
+      <div class="btn-stack">
+        <a class="btn" href="pages/game.html">Mulai Terbang</a>
+        <a class="btn secondary" href="pages/scores.html">Skor Tertinggi</a>
+        <a class="btn secondary" href="pages/howto.html">Cara Bermain</a>
+        <a class="btn secondary" href="pages/settings.html">Pengaturan</a>
+      </div>
+    </nav>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    document.getElementById('best-score').textContent = SkyStore.getBest();
+  </script>
 </body>
 </html>

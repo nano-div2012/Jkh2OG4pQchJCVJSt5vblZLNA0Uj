@@ -1,0 +1,37 @@
+/* Main menu layout */
+.menu { gap: var(--space-6); }
+
+.brand {
+  flex: 1 1 50%;
+  max-width: 420px;
+  color: #fff8ea;
+  text-shadow: 0 2px 0 rgba(29, 43, 69, .55);
+}
+.brand-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  margin-bottom: var(--space-3);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--gold);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  text-shadow: none;
+}
+.brand h1 {
+  font-size: clamp(40px, 12vh, 76px);
+  line-height: .95;
+  text-transform: uppercase;
+}
+.brand-sub { margin-top: var(--space-3); font-size: 15px; line-height: 1.5; }
+.best { margin-top: var(--space-4); font-size: 16px; }
+.best strong { color: #ffd66b; font-size: 22px; }
+
+.menu-panel { flex: 0 0 min(320px, 42%); }
+
+@media (max-height: 420px) {
+  .brand-sub { display: none; }
+  .brand h1 { font-size: 44px; }
+}

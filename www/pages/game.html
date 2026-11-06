@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Sky Courier - Main</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/game.css">
+</head>
+<body class="game-body">
+  <canvas id="stage" aria-label="Area permainan"></canvas>
+
+  <button id="btn-pause" class="btn secondary small pause-btn" type="button">Jeda</button>
+
+  <div id="pause-overlay" class="pause-overlay" hidden>
+    <div class="panel pause-panel">
+      <h2>Permainan Dijeda</h2>
+      <div class="btn-stack">
+        <button id="btn-resume" class="btn" type="button">Lanjutkan</button>
+        <a class="btn secondary" href="../index.html">Keluar ke Menu</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/store.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/game.js"></script>
+</body>
+</html>
